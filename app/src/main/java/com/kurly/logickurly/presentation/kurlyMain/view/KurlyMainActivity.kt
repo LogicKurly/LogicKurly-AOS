@@ -1,17 +1,21 @@
 package com.kurly.logickurly.presentation.kurlyMain.view
 
-import android.view.View
+import android.content.Intent
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.tabs.TabLayoutMediator
 import com.kurly.logickurly.R
 import com.kurly.logickurly.databinding.ActivityKurlyMainBinding
 import com.kurly.logickurly.presentation.base.BaseActivity
+import com.kurly.logickurly.presentation.kurlyMain.view.adapter.ViewPagerAdapter
 import com.kurly.logickurly.presentation.kurlyMain.viewModel.MainViewModel
+import com.kurly.logickurly.presentation.myRefrigerator.view.MyRefrigeratorActivity
 
 
 class kurlyMainActivity : BaseActivity<ActivityKurlyMainBinding>(R.layout.activity_kurly_main) {
 
+    private val tabTitleArray = arrayOf("컬리추천", "신상품", "베스트","알뜰쇼핑","특가/혜택")
 
     private val mainVM: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
@@ -27,7 +31,15 @@ class kurlyMainActivity : BaseActivity<ActivityKurlyMainBinding>(R.layout.activi
     }
 
     override fun setupViews() {
+        binding.viewPager.adapter = ViewPagerAdapter(supportFragmentManager,lifecycle)
+        TabLayoutMediator(binding.tablayout,binding.viewPager){ tab, position ->
+            tab.text = tabTitleArray[position]
+        }.attach()
 
+        binding.myRefrigeratorBtn.setOnClickListener{
+            val intent = Intent(this, MyRefrigeratorActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 
@@ -39,14 +51,7 @@ class kurlyMainActivity : BaseActivity<ActivityKurlyMainBinding>(R.layout.activi
 
     }
 
-    fun setFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.fragment, fragment)
-        transaction.commit()
-    }
-
     override fun onBackPressed() {
-        //finish()
+        finish()
     }
 }

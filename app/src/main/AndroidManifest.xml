@@ -26,6 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.myRefrigerator.view.MyRefrigeratorActivity"
+            android:configChanges="smallestScreenSize|screenLayout|keyboardHidden|orientation|screenSize"/>
     </application>
 
 </manifest>

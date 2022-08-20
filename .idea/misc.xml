@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_kurly_main.xml" value="0.1721014492753623" />
+        <entry key="app/src/main/res/drawable/round_purple.xml" value="0.185" />
+        <entry key="app/src/main/res/layout/activity_kurly_main.xml" value="0.2212973110917686" />
+        <entry key="app/src/main/res/layout/activity_my_refrigerator.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_best.xml" value="0.2028985507246377" />
+        <entry key="app/src/main/res/layout/fragment_kurly_recommnd.xml" value="0.2028985507246377" />
+        <entry key="app/src/main/res/layout/fragment_new_product.xml" value="0.2028985507246377" />
+        <entry key="app/src/main/res/layout/fragment_shopping.xml" value="0.2028985507246377" />
+        <entry key="app/src/main/res/layout/fragment_special.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/layout_base_header.xml" value="0.35780701568161233" />
       </map>
     </option>
