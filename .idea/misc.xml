@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/corner_lightgray_r4.xml" value="0.185" />
+        <entry key="app/src/main/res/drawable/corner_purple_r4.xml" value="0.185" />
         <entry key="app/src/main/res/drawable/corner_white_r8.xml" value="0.185" />
         <entry key="app/src/main/res/drawable/disabled_select_r24.xml" value="0.101" />
         <entry key="app/src/main/res/drawable/enabled_select_r24.xml" value="0.101" />
         <entry key="app/src/main/res/drawable/round_purple.xml" value="0.185" />
+        <entry key="app/src/main/res/drawable/selected_purple_r20.xml" value="0.1795" />
+        <entry key="app/src/main/res/drawable/stroke_lightgray_20dp.xml" value="0.185" />
+        <entry key="app/src/main/res/drawable/stroke_lightgray_r20.xml" value="0.185" />
+        <entry key="app/src/main/res/layout/activity_add_refrigerator.xml" value="0.31013402092386283" />
         <entry key="app/src/main/res/layout/activity_kurly_main.xml" value="0.2212973110917686" />
         <entry key="app/src/main/res/layout/activity_my_refrigerator.xml" value="0.4560496380558428" />
         <entry key="app/src/main/res/layout/dialog_delete_ingredient.xml" value="0.20260416666666667" />
@@ -18,6 +24,8 @@
         <entry key="app/src/main/res/layout/fragment_special.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/ingredient_grid_item.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/layout_base_header.xml" value="0.35780701568161233" />
+        <entry key="app/src/main/res/layout/order_item.xml" value="0.19157608695652173" />
+        <entry key="app/src/main/res/layout/popular_item.xml" value="0.431915747601053" />
       </map>
     </option>
   </component>

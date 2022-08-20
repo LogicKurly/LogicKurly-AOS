@@ -19,7 +19,7 @@
         android:theme="@style/Theme.LogicKurly"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.kurlyMain.view.kurlyMainActivity"
+            android:name=".presentation.kurlyMain.view.KurlyMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +30,12 @@
         <activity
             android:name=".presentation.myRefrigerator.view.MyRefrigeratorActivity"
             android:configChanges="smallestScreenSize|screenLayout|keyboardHidden|orientation|screenSize"/>
+
+        <activity
+            android:name=".presentation.addRefrigerator.view.AddRefrigeratorActivity"
+            android:configChanges="smallestScreenSize|screenLayout|keyboardHidden|orientation|screenSize"/>
+
+
     </application>
 
 </manifest>

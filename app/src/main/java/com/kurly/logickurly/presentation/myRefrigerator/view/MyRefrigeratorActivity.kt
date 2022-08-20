@@ -1,19 +1,24 @@
 package com.kurly.logickurly.presentation.myRefrigerator.view
 
+import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import androidx.fragment.app.Fragment
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kurly.logickurly.R
+import com.kurly.logickurly.data.model.Preferences
 import com.kurly.logickurly.databinding.ActivityMyRefrigeratorBinding
-import com.kurly.logickurly.presentation.myRefrigerator.viewModel.MyRefrigeratorViewModel
+import com.kurly.logickurly.presentation.addRefrigerator.view.AddRefrigeratorActivity
 import com.kurly.logickurly.presentation.base.BaseActivity
 import com.kurly.logickurly.presentation.myRefrigerator.view.adapter.ItemGridAdapter
 import com.kurly.logickurly.presentation.myRefrigerator.view.dialog.DeleteIngredientDialog
 import com.kurly.logickurly.presentation.myRefrigerator.view.dialog.NoticeDialog
+import com.kurly.logickurly.presentation.myRefrigerator.viewModel.MyRefrigeratorViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MyRefrigeratorActivity :
     BaseActivity<ActivityMyRefrigeratorBinding>(R.layout.activity_my_refrigerator) {
@@ -22,7 +27,7 @@ class MyRefrigeratorActivity :
 
 
     private val mainVM: MyRefrigeratorViewModel by lazy {
-        ViewModelProvider(this).get(MyRefrigeratorViewModel::class.java)
+        ViewModelProvider(this)[MyRefrigeratorViewModel::class.java]
     }
 
     /** dataBinding 객체에 추가적인 작업을 할 때 사용한다 */
@@ -41,142 +46,31 @@ class MyRefrigeratorActivity :
             onBackPressed()
         }
 
-        var itemList = arrayListOf(
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근"
-        )
-        var itemImageList = arrayListOf(
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근",
-            "당근"
-        )
-        var selectedItemList = arrayListOf(
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        )
+
+        var myRefrigerator = Preferences.getInstance(this).getStringItem("MyRefrigerator","")
+        var itemList = myRefrigerator?.split(",")
+        var tempList = mutableListOf<String>()
+        for(i in 0 until itemList!!.size){
+            if(itemList[i]!="" && itemList[i]!=","){
+                tempList.add(itemList[i].replace(",",""))
+            }
+        }
+        itemList = tempList
+        var itemImageList = itemList
+        var selectedItemList = mutableListOf<Int>()
+        for(i in 0 until itemList!!.size){
+            selectedItemList.add(0)
+        }
         var listManager = GridLayoutManager(this, 4)
-        var listAdapter = ItemGridAdapter(this, itemList, itemImageList, selectedItemList)
-        binding.tvCount.text =
-            binding.tvCount.text.toString().replace("#NUMBER#", itemList.size.toString())
+        var listAdapter = ItemGridAdapter(this, itemList as ArrayList<String>, itemImageList as ArrayList<String>,
+            selectedItemList as ArrayList<Int>
+        )
+        binding.tvCount.text = "전체 ${itemList.size}개"
+        var recyclerList = binding.ingredientRecyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = listManager
+            adapter = listAdapter
+        }
 
         listAdapter.setItemClickListener(object : ItemGridAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
@@ -185,7 +79,7 @@ class MyRefrigeratorActivity :
                 } else {
                     selectedItemList[position] = 0
                 }
-                listAdapter.notifyItemChanged(position)
+                listAdapter.notifyDataSetChanged()
 
                 if (selectedItemList.contains(1)) {
                     selected = true
@@ -214,6 +108,9 @@ class MyRefrigeratorActivity :
                             saveItemImageList.add(itemImageList[i])
                             saveSelectedList.add(0)
                         }
+                        else{
+                            Preferences.getInstance(this).putStringItem("MyRefrigerator",Preferences.getInstance(this).getStringItem("MyRefrigerator","").toString().replace(itemList[i],""))
+                        }
                     }
 
                     itemList.clear()
@@ -235,20 +132,30 @@ class MyRefrigeratorActivity :
             }
         }
 
-        var recyclerList = binding.ingredientRecyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = listManager
-            adapter = listAdapter
-        }
-
-
         binding.floatingLayout.setOnClickListener {
             if (selectedItemList.contains(1)) {
-                //화면 이동
+                //
             } else {
                 NoticeDialog().show(this.supportFragmentManager, "")
             }
         }
+
+        binding.header.ivAdd?.setOnClickListener{
+            val intent = Intent(this, AddRefrigeratorActivity::class.java)
+            startActivity(intent)
+        }
+
+        //initial setup
+        if (selectedItemList.contains(1)) {
+            selected = true
+            binding.floating.setBackgroundResource(R.drawable.enabled_select_r24)
+            binding.tvDeleteAll.setTextColor(Color.parseColor("#560c7b"))
+        } else {
+            selected = false
+            binding.floating.setBackgroundResource(R.drawable.disabled_select_r24)
+            binding.tvDeleteAll.setTextColor(Color.parseColor("#bdbdbd"))
+        }
+        binding.tvCount.text = "전체 ${itemList.size}개"
 
 
     }

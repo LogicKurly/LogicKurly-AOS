@@ -13,12 +13,12 @@ import com.kurly.logickurly.presentation.kurlyMain.viewModel.MainViewModel
 import com.kurly.logickurly.presentation.myRefrigerator.view.MyRefrigeratorActivity
 
 
-class kurlyMainActivity : BaseActivity<ActivityKurlyMainBinding>(R.layout.activity_kurly_main) {
+class KurlyMainActivity : BaseActivity<ActivityKurlyMainBinding>(R.layout.activity_kurly_main) {
 
     private val tabTitleArray = arrayOf("컬리추천", "신상품", "베스트","알뜰쇼핑","특가/혜택")
 
     private val mainVM: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
+        ViewModelProvider(this)[MainViewModel::class.java]
     }
 
     /** dataBinding 객체에 추가적인 작업을 할 때 사용한다 */
