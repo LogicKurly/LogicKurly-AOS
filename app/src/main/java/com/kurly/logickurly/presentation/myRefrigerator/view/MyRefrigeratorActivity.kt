@@ -1,5 +1,6 @@
 package com.kurly.logickurly.presentation.myRefrigerator.view
 
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -16,6 +17,8 @@ import com.kurly.logickurly.presentation.myRefrigerator.view.dialog.NoticeDialog
 
 class MyRefrigeratorActivity :
     BaseActivity<ActivityMyRefrigeratorBinding>(R.layout.activity_my_refrigerator) {
+
+    var selected = false
 
 
     private val mainVM: MyRefrigeratorViewModel by lazy {
@@ -185,42 +188,51 @@ class MyRefrigeratorActivity :
                 listAdapter.notifyItemChanged(position)
 
                 if (selectedItemList.contains(1)) {
+                    selected = true
                     binding.floating.setBackgroundResource(R.drawable.enabled_select_r24)
+                    binding.tvDeleteAll.setTextColor(Color.parseColor("#560c7b"))
                 } else {
+                    selected = false
                     binding.floating.setBackgroundResource(R.drawable.disabled_select_r24)
+                    binding.tvDeleteAll.setTextColor(Color.parseColor("#bdbdbd"))
                 }
             }
 
         })
 
         binding.tvDeleteAll.setOnClickListener {
-            var dialog = DeleteIngredientDialog {
-                Log.i("callback", "확인 !!")
-                var saveItemList = arrayListOf<String>()
-                var saveItemImageList = arrayListOf<String>()
-                var saveSelectedList = arrayListOf<Int>()
-                for (i in 0 until selectedItemList.size) {
-                    if (selectedItemList[i] != 1) {
-                        saveItemList.add(itemList[i])
-                        saveItemImageList.add(itemImageList[i])
-                        saveSelectedList.add(0)
+            if (selected){
+
+                var dialog = DeleteIngredientDialog {
+                    Log.i("callback", "확인 !!")
+                    var saveItemList = arrayListOf<String>()
+                    var saveItemImageList = arrayListOf<String>()
+                    var saveSelectedList = arrayListOf<Int>()
+                    for (i in 0 until selectedItemList.size) {
+                        if (selectedItemList[i] != 1) {
+                            saveItemList.add(itemList[i])
+                            saveItemImageList.add(itemImageList[i])
+                            saveSelectedList.add(0)
+                        }
                     }
+
+                    itemList.clear()
+                    itemImageList.clear()
+                    selectedItemList.clear()
+
+                    itemList.addAll(saveItemList)
+                    itemImageList.addAll(saveItemImageList)
+                    selectedItemList.addAll(saveSelectedList)
+
+                    binding.tvCount.text = "전체 ${saveItemList.size}개"
+                    binding.floating.setBackgroundResource(R.drawable.disabled_select_r24)
+                    binding.tvDeleteAll.setTextColor(Color.parseColor("#bdbdbd"))
+                    selected = false
+                    listAdapter.notifyDataSetChanged()
                 }
-
-                itemList.clear()
-                itemImageList.clear()
-                selectedItemList.clear()
-
-                itemList.addAll(saveItemList)
-                itemImageList.addAll(saveItemImageList)
-                selectedItemList.addAll(saveSelectedList)
-
-                binding.tvCount.text = "전체 ${saveItemList.size}개"
-                binding.floating.setBackgroundResource(R.drawable.disabled_select_r24)
-                listAdapter.notifyDataSetChanged()
+                dialog.isCancelable = true
+                dialog.show(this.supportFragmentManager, "")
             }
-            dialog.isCancelable = true
-            dialog.show(this.supportFragmentManager, "")
         }
 
         var recyclerList = binding.ingredientRecyclerView.apply {
