@@ -35,6 +35,10 @@
             android:name=".presentation.addRefrigerator.view.AddRefrigeratorActivity"
             android:configChanges="smallestScreenSize|screenLayout|keyboardHidden|orientation|screenSize"/>
 
+        <activity
+            android:name=".presentation.recommendRecipe.view.RecommendRecipeActivty"
+            android:configChanges="smallestScreenSize|screenLayout|keyboardHidden|orientation|screenSize"/>
+
 
     </application>
 

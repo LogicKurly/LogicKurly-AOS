@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,9 @@ class ItemGridAdapter(var context: Context, var productList: ArrayList<String>, 
             .fitCenter()
             .circleCrop()
             .into(holder.ivItem)
+
+        Log.i("!!!",selectedList.toString())
+        Log.i("!!!",position.toString())
 
         if(selectedList[position]==1){
             holder.ivItem.setColorFilter(Color.parseColor("#809b51e0"))

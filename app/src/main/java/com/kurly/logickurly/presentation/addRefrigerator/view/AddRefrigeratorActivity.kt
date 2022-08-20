@@ -1,7 +1,12 @@
 package com.kurly.logickurly.presentation.addRefrigerator.view
 
+import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +39,12 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
 
     override fun setupViews() {
 
+        binding.rootContainer.setOnClickListener{
+            binding.noSearchContainer.visibility = View.VISIBLE
+            softkeyboardHide()
+        }
+
+        binding.noSearchContainer.visibility = View.VISIBLE
         binding.header.tvTitle?.text = "냉장고 담기"
         binding.header.ivAdd?.visibility = View.INVISIBLE
         binding.header.ivBack?.setImageResource(R.drawable.cancel)
@@ -202,7 +213,20 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
         }
 
 
+        binding.editText.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                binding.noSearchContainer.visibility = View.GONE
+            }
 
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.noSearchContainer.visibility = View.GONE
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                binding.noSearchContainer.visibility = View.GONE
+            }
+
+        })
 
 
     }
@@ -217,5 +241,10 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
 
     override fun onSubscribe() {
 
+    }
+
+    fun softkeyboardHide() {
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }

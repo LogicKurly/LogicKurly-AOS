@@ -17,6 +17,7 @@ import com.kurly.logickurly.presentation.myRefrigerator.view.adapter.ItemGridAda
 import com.kurly.logickurly.presentation.myRefrigerator.view.dialog.DeleteIngredientDialog
 import com.kurly.logickurly.presentation.myRefrigerator.view.dialog.NoticeDialog
 import com.kurly.logickurly.presentation.myRefrigerator.viewModel.MyRefrigeratorViewModel
+import com.kurly.logickurly.presentation.recommendRecipe.view.RecommendRecipeActivty
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -96,28 +97,28 @@ class MyRefrigeratorActivity :
 
         binding.tvDeleteAll.setOnClickListener {
             if (selected){
-
                 var dialog = DeleteIngredientDialog {
                     Log.i("callback", "확인 !!")
                     var saveItemList = arrayListOf<String>()
                     var saveItemImageList = arrayListOf<String>()
                     var saveSelectedList = arrayListOf<Int>()
                     for (i in 0 until selectedItemList.size) {
-                        if (selectedItemList[i] != 1) {
-                            saveItemList.add(itemList[i])
+                        if (selectedItemList[i] == 0) {
+                            saveItemList.add((itemList as ArrayList<String>)[i])
                             saveItemImageList.add(itemImageList[i])
                             saveSelectedList.add(0)
                         }
                         else{
-                            Preferences.getInstance(this).putStringItem("MyRefrigerator",Preferences.getInstance(this).getStringItem("MyRefrigerator","").toString().replace(itemList[i],""))
+                            Preferences.getInstance(this).putStringItem("MyRefrigerator",Preferences.getInstance(this).getStringItem("MyRefrigerator","").toString().replace(
+                                (itemList as ArrayList<String>)[i],""))
                         }
                     }
 
-                    itemList.clear()
+                    (itemList as ArrayList<String>).clear()
                     itemImageList.clear()
                     selectedItemList.clear()
 
-                    itemList.addAll(saveItemList)
+                    itemList = saveItemList
                     itemImageList.addAll(saveItemImageList)
                     selectedItemList.addAll(saveSelectedList)
 
@@ -134,7 +135,8 @@ class MyRefrigeratorActivity :
 
         binding.floatingLayout.setOnClickListener {
             if (selectedItemList.contains(1)) {
-                //
+                val intent = Intent(this, RecommendRecipeActivty::class.java)
+                startActivity(intent)
             } else {
                 NoticeDialog().show(this.supportFragmentManager, "")
             }
@@ -155,7 +157,7 @@ class MyRefrigeratorActivity :
             binding.floating.setBackgroundResource(R.drawable.disabled_select_r24)
             binding.tvDeleteAll.setTextColor(Color.parseColor("#bdbdbd"))
         }
-        binding.tvCount.text = "전체 ${itemList.size}개"
+        binding.tvCount.text = "전체 ${(itemList as ArrayList<String>).size}개"
 
 
     }
