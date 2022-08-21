@@ -19,6 +19,7 @@ import com.kurly.logickurly.presentation.recommendRecipe.viewModel.RecommendReci
 class RecommendRecipeActivty: BaseActivity<ActivityRecommendRecipeBinding>(R.layout.activity_recommend_recipe) {
 
     lateinit var recommendRecipeFragment: RecommendRecipeFragment
+    var recipeMenu = ""
 
     private val mainVM: RecommendRecipeViewModel by lazy {
         ViewModelProvider(this)[RecommendRecipeViewModel::class.java]

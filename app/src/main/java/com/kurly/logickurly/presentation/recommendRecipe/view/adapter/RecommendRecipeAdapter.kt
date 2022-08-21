@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -34,6 +35,9 @@ class RecommendRecipeAdapter (var context: Context, var foodList: ArrayList<Stri
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") parentPosition: Int) {
 
         holder.tvFoodTitle.text = foodList[parentPosition]
+        holder.recipeContainer.setOnClickListener{
+            itemClickListener.onClick(it,parentPosition)
+        }
 
         Glide.with(context)
             .load(R.drawable.carrot)
@@ -58,6 +62,7 @@ class RecommendRecipeAdapter (var context: Context, var foodList: ArrayList<Stri
         }
         listAdapter.setItemClickListener(object : PopularAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
+
             }
         })
 
@@ -65,6 +70,7 @@ class RecommendRecipeAdapter (var context: Context, var foodList: ArrayList<Stri
 
     class ViewHolder(v: View): RecyclerView.ViewHolder(v){
         private var view : View = v
+        var recipeContainer = v.findViewById<ConstraintLayout>(R.id.recipeContainer)
         var ivFood = v.findViewById<ImageView>(R.id.ivFood)
         var tvFoodTitle = v.findViewById<TextView>(R.id.tvFoodTitle)
         var requireIngredientRecyclerView = v.findViewById<RecyclerView>(R.id.requireIngredientRecyclerView)

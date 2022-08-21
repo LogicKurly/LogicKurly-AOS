@@ -11,8 +11,6 @@ import android.provider.MediaStore
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,13 +25,11 @@ import com.kurly.logickurly.databinding.ActivityKurlyMainBinding
 import com.kurly.logickurly.presentation.addRefrigerator.adapter.PopularAdapter
 import com.kurly.logickurly.presentation.base.BaseActivity
 import com.kurly.logickurly.presentation.cameraSearch.viewModel.CameraSearchViewModel
-import com.kurly.logickurly.presentation.kurlyMain.view.adapter.ViewPagerAdapter
-import com.kurly.logickurly.presentation.kurlyMain.viewModel.MainViewModel
-import com.kurly.logickurly.presentation.myRefrigerator.view.MyRefrigeratorActivity
 
 class CameraSearchActivity : BaseActivity<ActivityCameraSearchBinding>(R.layout.activity_camera_search) {
 
     val REQUEST_IMAGE_CAPTURE = 0
+    private var toast: Toast? = null
 
     private val mainVM: CameraSearchViewModel by lazy {
         ViewModelProvider(this)[CameraSearchViewModel::class.java]
@@ -103,18 +99,16 @@ class CameraSearchActivity : BaseActivity<ActivityCameraSearchBinding>(R.layout.
             override fun onClick(view: View, position: Int) {
                 if (selectedItemList[position] == 0) {
                     selectedItemList[position] = 1
-                    Toast.makeText(this@CameraSearchActivity,"선택하신 식재료가 담겼습니다", Toast.LENGTH_SHORT).show()
+                    makeToast("선택하신 식재료가 담겼습니다")
                     Preferences.getInstance(this@CameraSearchActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@CameraSearchActivity).getStringItem("MyRefrigerator","")+",${itemList[position]}")
                 } else {
                     selectedItemList[position] = 0
-                    Toast.makeText(this@CameraSearchActivity,"선택하신 식재료를 꺼냈습니다", Toast.LENGTH_SHORT).show()
+                    makeToast("선택하신 식재료를 꺼냈습니다")
                     Preferences.getInstance(this@CameraSearchActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@CameraSearchActivity).getStringItem("MyRefrigerator","").toString().replace(itemList[position],""))
                 }
                 listAdapter.notifyDataSetChanged()
             }
         })
-
-
 
     }
 
@@ -149,7 +143,7 @@ class CameraSearchActivity : BaseActivity<ActivityCameraSearchBinding>(R.layout.
             var count = grantResults.count { it == PackageManager.PERMISSION_DENIED }
 
             if(count != 0) {
-                Toast.makeText(applicationContext, "권한을 동의해주세요.", Toast.LENGTH_SHORT).show()
+                makeToast("권한을 동의해주세요.")
                 finish()
             }
         }
@@ -180,6 +174,13 @@ class CameraSearchActivity : BaseActivity<ActivityCameraSearchBinding>(R.layout.
     }
 
     override fun onBackPressed() {
+        toast?.cancel()
         finish()
+    }
+
+    private fun makeToast(message: String) {
+        toast?.cancel()
+        toast = Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT)
+        toast?.show()
     }
 }

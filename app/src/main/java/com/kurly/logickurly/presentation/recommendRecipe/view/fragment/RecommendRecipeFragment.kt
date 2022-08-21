@@ -10,6 +10,7 @@ import com.kurly.logickurly.data.model.Preferences
 import com.kurly.logickurly.databinding.FragmentRecommendRecipeBinding
 import com.kurly.logickurly.presentation.addRefrigerator.adapter.PopularAdapter
 import com.kurly.logickurly.presentation.base.BaseFragment
+import com.kurly.logickurly.presentation.recommendRecipe.view.RecommendRecipeActivty
 import com.kurly.logickurly.presentation.recommendRecipe.view.adapter.RecommendRecipeAdapter
 import com.kurly.logickurly.presentation.recommendRecipe.viewModel.RecommendRecipeViewModel
 
@@ -65,20 +66,13 @@ class RecommendRecipeFragment: BaseFragment<FragmentRecommendRecipeBinding>(R.la
         })
 
         //추천 음식
-        var foodList = mutableListOf<String>()
+        var foodList = mutableListOf("차돌박이 된장찌개","김치볶음밥")
         var foodImageList = mutableListOf<String>()
-        var requireIngredientList = mutableListOf<String>()
-        var requireIngredientList2 = mutableListOf<String>()
+        var requireIngredientList = mutableListOf("된장","마늘")
+        var requireIngredientList2 = mutableListOf("계란","고춧가루")
         var requireFoodList = mutableListOf<ArrayList<String>>()
 
-        foodList.add("차돌박이 된장찌개")
-        requireIngredientList.add("된장")
-        requireIngredientList.add("마늘")
         requireFoodList.add(requireIngredientList as ArrayList<String>)
-
-        foodList.add("김치볶음밥")
-        requireIngredientList2.add("계란")
-        requireIngredientList2.add("고춧가루")
         requireFoodList.add(requireIngredientList2 as ArrayList<String>)
 
         var listManager2 = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -93,9 +87,11 @@ class RecommendRecipeFragment: BaseFragment<FragmentRecommendRecipeBinding>(R.la
 
         listAdapter2.setItemClickListener(object : RecommendRecipeAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
-                Log.i("selected",foodList[position])
+                (activity as RecommendRecipeActivty).recipeMenu = foodList[position]
+                (activity as RecommendRecipeActivty).setFragment(RecommendDetailFragment())
             }
         })
+
     }
 
     override fun onSubscribe() {

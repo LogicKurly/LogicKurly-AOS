@@ -26,6 +26,7 @@ import com.kurly.logickurly.presentation.myRefrigerator.view.MyRefrigeratorActiv
 
 class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.layout.activity_add_refrigerator) {
 
+    private var toast: Toast? = null
 
     private val mainVM: AddRefrigeratorViewModel by lazy {
         ViewModelProvider(this)[AddRefrigeratorViewModel::class.java]
@@ -239,11 +240,11 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
             override fun onClick(view: View, position: Int) {
                 if (textDetectSelectedItemList[position] == 0) {
                     textDetectSelectedItemList[position] = 1
-                    Toast.makeText(this@AddRefrigeratorActivity,"선택하신 식재료가 담겼습니다", Toast.LENGTH_SHORT).show()
+                    makeToast("선택하신 식재료가 담겼습니다")
                     Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@AddRefrigeratorActivity).getStringItem("MyRefrigerator","")+",${textDetectList[position]}")
                 } else {
                     textDetectSelectedItemList[position] = 0
-                    Toast.makeText(this@AddRefrigeratorActivity,"선택하신 식재료를 꺼냈습니다", Toast.LENGTH_SHORT).show()
+                    makeToast("선택하신 식재료를 꺼냈습니다")
                     Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@AddRefrigeratorActivity).getStringItem("MyRefrigerator","").toString().replace(textDetectList[position],""))
                 }
                 listSearchAdapter.notifyDataSetChanged()
@@ -356,11 +357,11 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
             override fun onClick(view: View, position: Int) {
                 if (selectedItemList[position] == 0) {
                     selectedItemList[position] = 1
-                    Toast.makeText(this@AddRefrigeratorActivity,"선택하신 식재료가 담겼습니다", Toast.LENGTH_SHORT).show()
+                    makeToast("선택하신 식재료가 담겼습니다")
                     Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@AddRefrigeratorActivity).getStringItem("MyRefrigerator","")+",${itemList[position]}")
                 } else {
                     selectedItemList[position] = 0
-                    Toast.makeText(this@AddRefrigeratorActivity,"선택하신 식재료를 꺼냈습니다", Toast.LENGTH_SHORT).show()
+                    makeToast("선택하신 식재료를 꺼냈습니다")
                     Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@AddRefrigeratorActivity).getStringItem("MyRefrigerator","").toString().replace(itemList[position],""))
                 }
                 listAdapter.notifyDataSetChanged()
@@ -376,6 +377,7 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
     }
 
     override fun onBackPressed() {
+        toast?.cancel()
         finish()
     }
 
@@ -387,4 +389,11 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
         val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
+
+    private fun makeToast(message: String) {
+        toast?.cancel()
+        toast = Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT)
+        toast?.show()
+    }
+
 }
