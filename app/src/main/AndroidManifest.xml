@@ -27,6 +27,17 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.food_classification.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths"></meta-data>
+        </provider>
+
+
         <activity
             android:name=".presentation.myRefrigerator.view.MyRefrigeratorActivity"
             android:configChanges="smallestScreenSize|screenLayout|keyboardHidden|orientation|screenSize"/>
@@ -37,6 +48,10 @@
 
         <activity
             android:name=".presentation.recommendRecipe.view.RecommendRecipeActivty"
+            android:configChanges="smallestScreenSize|screenLayout|keyboardHidden|orientation|screenSize"/>
+
+        <activity
+            android:name=".presentation.cameraSearch.view.CameraSearchActivity"
             android:configChanges="smallestScreenSize|screenLayout|keyboardHidden|orientation|screenSize"/>
 
 

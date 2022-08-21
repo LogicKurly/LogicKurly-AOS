@@ -1,6 +1,7 @@
 package com.kurly.logickurly.presentation.addRefrigerator.view
 
 import android.content.Context
+import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -19,6 +20,8 @@ import com.kurly.logickurly.presentation.addRefrigerator.adapter.PopularAdapter
 import com.kurly.logickurly.presentation.addRefrigerator.adapter.searchListAdapter
 import com.kurly.logickurly.presentation.addRefrigerator.viewModel.AddRefrigeratorViewModel
 import com.kurly.logickurly.presentation.base.BaseActivity
+import com.kurly.logickurly.presentation.cameraSearch.view.CameraSearchActivity
+import com.kurly.logickurly.presentation.myRefrigerator.view.MyRefrigeratorActivity
 
 
 class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.layout.activity_add_refrigerator) {
@@ -212,6 +215,13 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
 
         binding.ivDeleteAll.setOnClickListener{
             binding.editText.text.clear()
+        }
+
+        //카메라로 재료 등록
+        binding.cameraBtn.setOnClickListener{
+            Preferences.getInstance(this).putBooleanItem("takePicture",false)
+            val intent = Intent(this, CameraSearchActivity::class.java)
+            startActivity(intent)
         }
 
         // 직접입력으로 재료 등록
