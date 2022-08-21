@@ -58,11 +58,18 @@ class CameraSearchActivity : BaseActivity<ActivityCameraSearchBinding>(R.layout.
         binding.tvSearchText?.setOnClickListener{
             onBackPressed()
         }
+        binding.tvSearchText2?.setOnClickListener{
+            onBackPressed()
+        }
 
         checkPermission()
         if(!Preferences.getInstance(this).getBooleanItem("takePicture",false)){
             takePicture()
             Preferences.getInstance(this).putBooleanItem("takePicture",true)
+        }
+        else{
+            binding.resultContainer.visibility = View.GONE
+            binding.noResultContainer.visibility = View.VISIBLE
         }
 
         //사람들이 많이 검색한 재료
