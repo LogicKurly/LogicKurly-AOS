@@ -2,7 +2,6 @@ package com.kurly.logickurly.presentation.addRefrigerator.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View

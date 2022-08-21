@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kurly.logickurly.R
+import com.kurly.logickurly.presentation.recommendRecipe.view.adapter.RecommendRecipeAdapter
 
 class PopularAdapter(var context: Context, var popularList: ArrayList<String>, var selectedList : ArrayList<Int>): RecyclerView.Adapter<PopularAdapter.ViewHolder>(){
 

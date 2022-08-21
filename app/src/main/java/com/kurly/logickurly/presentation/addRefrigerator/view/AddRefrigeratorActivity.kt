@@ -3,11 +3,9 @@ package com.kurly.logickurly.presentation.addRefrigerator.view
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,8 +37,8 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
 
     override fun setupViews() {
 
+        binding.ivDeleteAll.setImageResource(0)
         binding.rootContainer.setOnClickListener{
-            binding.noSearchContainer.visibility = View.VISIBLE
             softkeyboardHide()
         }
 
@@ -74,28 +72,6 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
                 selectedItemList.add(0)
             }
         }
-
-        var listManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        var listAdapter = PopularAdapter(this, itemList, selectedItemList as ArrayList<Int>)
-        var recyclerList = binding.popularRecyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = listManager
-            adapter = listAdapter
-        }
-        listAdapter.setItemClickListener(object : PopularAdapter.ItemClickListener {
-            override fun onClick(view: View, position: Int) {
-                if (selectedItemList[position] == 0) {
-                    selectedItemList[position] = 1
-                    Toast.makeText(this@AddRefrigeratorActivity,"선택하신 식재료가 담겼습니다", Toast.LENGTH_SHORT).show()
-                    Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@AddRefrigeratorActivity).getStringItem("MyRefrigerator","")+",${itemList[position]}")
-                } else {
-                    selectedItemList[position] = 0
-                    Toast.makeText(this@AddRefrigeratorActivity,"선택하신 식재료를 꺼냈습니다", Toast.LENGTH_SHORT).show()
-                    Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@AddRefrigeratorActivity).getStringItem("MyRefrigerator","").toString().replace(itemList[position],""))
-                }
-                listAdapter.notifyDataSetChanged()
-            }
-        })
 
         //order RecyclerView
         var orderList1 = arrayListOf("닭고기", "파스타면","또띠아","참깨드레싱","케찹", "간장","시리얼","버섯","파프리카")
@@ -212,20 +188,69 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
             adapter = listAdapter2
         }
 
+        binding.ivDeleteAll.setOnClickListener{
+            binding.editText.text.clear()
+        }
+
 
         binding.editText.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.noSearchContainer.visibility = View.GONE
+                if(binding.editText.text.toString().isEmpty()){
+                    binding.noSearchContainer.visibility = View.VISIBLE
+                    binding.ivDeleteAll.setImageResource(0)
+                }
+                else{
+                    binding.noSearchContainer.visibility = View.GONE
+                    binding.ivDeleteAll.setImageResource(R.drawable.delete_all)
+                }
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.noSearchContainer.visibility = View.GONE
+                if(binding.editText.text.toString().isEmpty()){
+                    binding.noSearchContainer.visibility = View.VISIBLE
+                    binding.ivDeleteAll.setImageResource(0)
+                }
+                else{
+                    binding.noSearchContainer.visibility = View.GONE
+                    binding.ivDeleteAll.setImageResource(R.drawable.delete_all)
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {
-                binding.noSearchContainer.visibility = View.GONE
+                if(binding.editText.text.toString().isEmpty()){
+                    binding.noSearchContainer.visibility = View.VISIBLE
+                    binding.ivDeleteAll.setImageResource(0)
+                }
+                else{
+                    binding.noSearchContainer.visibility = View.GONE
+                    binding.ivDeleteAll.setImageResource(R.drawable.delete_all)
+                }
             }
 
+        })
+
+        var listManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        var listAdapter = PopularAdapter(this, itemList, selectedItemList as ArrayList<Int>)
+        var recyclerList = binding.popularRecyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = listManager
+            adapter = listAdapter
+        }
+
+        listAdapter.setItemClickListener(object : PopularAdapter.ItemClickListener {
+            override fun onClick(view: View, position: Int) {
+                if (selectedItemList[position] == 0) {
+                    selectedItemList[position] = 1
+                    Toast.makeText(this@AddRefrigeratorActivity,"선택하신 식재료가 담겼습니다", Toast.LENGTH_SHORT).show()
+                    Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@AddRefrigeratorActivity).getStringItem("MyRefrigerator","")+",${itemList[position]}")
+                } else {
+                    selectedItemList[position] = 0
+                    Toast.makeText(this@AddRefrigeratorActivity,"선택하신 식재료를 꺼냈습니다", Toast.LENGTH_SHORT).show()
+                    Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@AddRefrigeratorActivity).getStringItem("MyRefrigerator","").toString().replace(itemList[position],""))
+                }
+                listAdapter.notifyDataSetChanged()
+                listAdapter2.notifyDataSetChanged()
+            }
         })
 
 

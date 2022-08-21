@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kurly.logickurly.R
@@ -18,7 +17,6 @@ import com.kurly.logickurly.presentation.myRefrigerator.view.dialog.DeleteIngred
 import com.kurly.logickurly.presentation.myRefrigerator.view.dialog.NoticeDialog
 import com.kurly.logickurly.presentation.myRefrigerator.viewModel.MyRefrigeratorViewModel
 import com.kurly.logickurly.presentation.recommendRecipe.view.RecommendRecipeActivty
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MyRefrigeratorActivity :
@@ -135,7 +133,14 @@ class MyRefrigeratorActivity :
 
         binding.floatingLayout.setOnClickListener {
             if (selectedItemList.contains(1)) {
+                var ingredient = mutableListOf<String>()
+                for(i in 0 until selectedItemList.size){
+                    if(selectedItemList[i]==1){
+                        ingredient.add((itemList as ArrayList<String>)[i])
+                    }
+                }
                 val intent = Intent(this, RecommendRecipeActivty::class.java)
+                Preferences.getInstance(this).putStringItem("ingredient",ingredient.toString())
                 startActivity(intent)
             } else {
                 NoticeDialog().show(this.supportFragmentManager, "")

@@ -4,6 +4,7 @@ package com.kurly.logickurly.data.model
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.kurly.logickurly.presentation.recommendRecipe.view.fragment.RecommendRecipeFragment
 
 class Preferences private constructor(context: Context) {
     init {
@@ -198,9 +199,9 @@ class Preferences private constructor(context: Context) {
 
         @Volatile private var instance: Preferences? = null
 
-        @JvmStatic fun getInstance(context: Context): Preferences =
+        @JvmStatic fun getInstance(context: Context?): Preferences =
             instance ?: synchronized(this) {
-                instance ?: Preferences(context).also {
+                instance ?: Preferences(context!!).also {
                     instance = it
                 }
             }

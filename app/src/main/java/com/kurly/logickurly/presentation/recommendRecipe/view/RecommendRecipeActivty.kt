@@ -1,19 +1,24 @@
 package com.kurly.logickurly.presentation.recommendRecipe.view
 
-import android.content.Intent
+import android.util.Log
+import android.view.View
 import android.view.WindowManager
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kurly.logickurly.R
-import com.kurly.logickurly.databinding.ActivityKurlyMainBinding
+import com.kurly.logickurly.data.model.Preferences
 import com.kurly.logickurly.databinding.ActivityRecommendRecipeBinding
+import com.kurly.logickurly.presentation.addRefrigerator.adapter.PopularAdapter
 import com.kurly.logickurly.presentation.base.BaseActivity
-import com.kurly.logickurly.presentation.kurlyMain.view.adapter.ViewPagerAdapter
-import com.kurly.logickurly.presentation.kurlyMain.viewModel.MainViewModel
-import com.kurly.logickurly.presentation.myRefrigerator.view.MyRefrigeratorActivity
+import com.kurly.logickurly.presentation.recommendRecipe.view.adapter.RecommendRecipeAdapter
+import com.kurly.logickurly.presentation.recommendRecipe.view.fragment.RecommendRecipeFragment
 import com.kurly.logickurly.presentation.recommendRecipe.viewModel.RecommendRecipeViewModel
 
 class RecommendRecipeActivty: BaseActivity<ActivityRecommendRecipeBinding>(R.layout.activity_recommend_recipe) {
+
+    lateinit var recommendRecipeFragment: RecommendRecipeFragment
 
     private val mainVM: RecommendRecipeViewModel by lazy {
         ViewModelProvider(this)[RecommendRecipeViewModel::class.java]
@@ -26,6 +31,9 @@ class RecommendRecipeActivty: BaseActivity<ActivityRecommendRecipeBinding>(R.lay
 
     override fun setup() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+        recommendRecipeFragment = RecommendRecipeFragment()
+        setFragment(recommendRecipeFragment)
     }
 
     override fun setupViews() {
@@ -42,10 +50,21 @@ class RecommendRecipeActivty: BaseActivity<ActivityRecommendRecipeBinding>(R.lay
     }
 
     override fun release() {
-
     }
 
     override fun onBackPressed() {
-        finish()
+        if (supportFragmentManager.findFragmentById(R.id.fragment) == recommendRecipeFragment) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
     }
+
+    fun setFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragment, fragment)
+        transaction.commit()
+    }
+
 }
