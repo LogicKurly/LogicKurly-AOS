@@ -42,13 +42,105 @@ class ItemGridAdapter(var context: Context, var productList: ArrayList<String>, 
             itemClickListener.onClick(it,position)
         }
 
-        Glide.with(context)
-            .load(R.drawable.carrot)
-            //.load(productImage[position].toString())
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .fitCenter()
-            .circleCrop()
-            .into(holder.ivItem)
+        when (productList[position]) {
+            "감자" -> {
+                Glide.with(context)
+                    .load(R.drawable.potato)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "고추" -> {
+                Glide.with(context)
+                    .load(R.drawable.pepper)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "굴비" -> {
+                Glide.with(context)
+                    .load(R.drawable.gulbi)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "단호박" -> {
+                Glide.with(context)
+                    .load(R.drawable.sweet_pumkin)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "당근" -> {
+                Glide.with(context)
+                    .load(R.drawable.carrot)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "두부" -> {
+                Glide.with(context)
+                    .load(R.drawable.dubu)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "배추" -> {
+                Glide.with(context)
+                    .load(R.drawable.cabbage)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "버섯" -> {
+                Glide.with(context)
+                    .load(R.drawable.mushroom)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "상추" -> {
+                Glide.with(context)
+                    .load(R.drawable.lettuce)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "시금치" -> {
+                Glide.with(context)
+                    .load(R.drawable.spinach)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+            "차돌박이" -> {
+                Glide.with(context)
+                    .load(R.drawable.chdol)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+
+            else -> {
+                Glide.with(context)
+                    .load(R.drawable.carrot)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .fitCenter()
+                    .circleCrop()
+                    .into(holder.ivItem)
+            }
+        }
 
         Log.i("!!!",selectedList.toString())
         Log.i("!!!",position.toString())

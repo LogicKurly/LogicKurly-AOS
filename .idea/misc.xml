@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/corner_lightgray_r12.xml" value="0.1795" />
+        <entry key="app/src/main/res/drawable/corner_lightgray_r20.xml" value="0.139" />
         <entry key="app/src/main/res/drawable/corner_lightgray_r4.xml" value="0.185" />
         <entry key="app/src/main/res/drawable/corner_lightgray_r4_left.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/corner_lightgray_r4_right.xml" value="0.1835" />
@@ -16,7 +17,7 @@
         <entry key="app/src/main/res/drawable/stroke_lightgray_20dp.xml" value="0.185" />
         <entry key="app/src/main/res/drawable/stroke_lightgray_r12.xml" value="0.1795" />
         <entry key="app/src/main/res/drawable/stroke_lightgray_r20.xml" value="0.185" />
-        <entry key="app/src/main/res/layout/activity_add_refrigerator.xml" value="0.39265747070312507" />
+        <entry key="app/src/main/res/layout/activity_add_refrigerator.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_kurly_main.xml" value="0.2212973110917686" />
         <entry key="app/src/main/res/layout/activity_my_refrigerator.xml" value="0.1929681112019624" />
         <entry key="app/src/main/res/layout/activity_recommend_recipe.xml" value="0.18004927131997878" />
@@ -34,6 +35,7 @@
         <entry key="app/src/main/res/layout/order_item.xml" value="0.19157608695652173" />
         <entry key="app/src/main/res/layout/popular_item.xml" value="0.431915747601053" />
         <entry key="app/src/main/res/layout/recommend_recipe_item.xml" value="0.16084442138671878" />
+        <entry key="app/src/main/res/layout/search_list_item.xml" value="0.38235294117647056" />
       </map>
     </option>
   </component>
