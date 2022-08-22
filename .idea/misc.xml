@@ -24,6 +24,8 @@
         <entry key="app/src/main/res/layout/activity_kurly_main.xml" value="0.2212973110917686" />
         <entry key="app/src/main/res/layout/activity_my_refrigerator.xml" value="0.1929681112019624" />
         <entry key="app/src/main/res/layout/activity_recommend_recipe.xml" value="0.18004927131997878" />
+        <entry key="app/src/main/res/layout/dialog_add_cart.xml" value="0.1118421052631579" />
+        <entry key="app/src/main/res/layout/dialog_camera_notice.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_delete_ingredient.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/dialog_my_refreigerator_notice.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/dialog_recipe_notice.xml" value="0.12329234972677595" />
@@ -38,7 +40,9 @@
         <entry key="app/src/main/res/layout/layout_base_header.xml" value="0.35780701568161233" />
         <entry key="app/src/main/res/layout/order_item.xml" value="0.19157608695652173" />
         <entry key="app/src/main/res/layout/popular_item.xml" value="0.431915747601053" />
+        <entry key="app/src/main/res/layout/product_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/recommend_recipe_item.xml" value="0.16084442138671878" />
+        <entry key="app/src/main/res/layout/require_ingredient_item.xml" value="0.31769436997319034" />
         <entry key="app/src/main/res/layout/search_list_item.xml" value="0.38235294117647056" />
         <entry key="app/src/main/res/xml/filepaths.xml" value="0.10888157894736843" />
       </map>

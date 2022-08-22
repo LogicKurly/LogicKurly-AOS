@@ -24,7 +24,9 @@ import com.kurly.logickurly.databinding.ActivityCameraSearchBinding
 import com.kurly.logickurly.databinding.ActivityKurlyMainBinding
 import com.kurly.logickurly.presentation.addRefrigerator.adapter.PopularAdapter
 import com.kurly.logickurly.presentation.base.BaseActivity
+import com.kurly.logickurly.presentation.cameraSearch.dialog.CameraNoticeDialog
 import com.kurly.logickurly.presentation.cameraSearch.viewModel.CameraSearchViewModel
+import com.kurly.logickurly.presentation.myRefrigerator.view.dialog.NoticeDialog
 
 class CameraSearchActivity : BaseActivity<ActivityCameraSearchBinding>(R.layout.activity_camera_search) {
 
@@ -68,8 +70,8 @@ class CameraSearchActivity : BaseActivity<ActivityCameraSearchBinding>(R.layout.
             Preferences.getInstance(this).putBooleanItem("takePicture",true)
         }
         else{
-            binding.resultContainer.visibility = View.GONE
-            binding.noResultContainer.visibility = View.VISIBLE
+            binding.resultContainer.visibility = View.VISIBLE
+            binding.noResultContainer.visibility = View.GONE
         }
 
         //사람들이 많이 검색한 재료
@@ -120,6 +122,8 @@ class CameraSearchActivity : BaseActivity<ActivityCameraSearchBinding>(R.layout.
     }
 
     fun takePicture(){
+
+       // CameraNoticeDialog().show(this.supportFragmentManager, "")
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
                 takePictureIntent.resolveActivity(packageManager)?.also {
