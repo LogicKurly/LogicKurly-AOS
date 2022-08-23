@@ -39,11 +39,28 @@ class RecommendRecipeAdapter (var context: Context, var foodList: ArrayList<Stri
             itemClickListener.onClick(it,parentPosition)
         }
 
-        Glide.with(context)
-            .load(R.drawable.carrot)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .fitCenter()
-            .into(holder.ivFood)
+        if(foodList[parentPosition].contains("된장찌개")){
+            Glide.with(context)
+                .load(R.drawable.jjigae)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .fitCenter()
+                .into(holder.ivFood)
+        }
+        else if(foodList[parentPosition].contains("김치볶음밥")){
+            Glide.with(context)
+                .load(R.drawable.kimchi)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .fitCenter()
+                .into(holder.ivFood)
+        }
+        else{
+            Glide.with(context)
+                .load(R.drawable.default_img)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .fitCenter()
+                .into(holder.ivFood)
+        }
+
 
         var listManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         var selectedList = mutableListOf<ArrayList<Int>>()

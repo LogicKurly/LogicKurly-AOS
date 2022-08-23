@@ -4,6 +4,8 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -36,6 +38,18 @@ class RecommendDetailFragment : BaseFragment<FragmentRecommendDetailBinding>(R.l
     override fun setupViews() {
 
         binding.tvRecipe.text = (activity as RecommendRecipeActivty).recipeMenu
+        if((activity as RecommendRecipeActivty).recipeMenu.contains("된장찌개")){
+            binding.recipeContainer.setBackgroundResource(R.drawable.jjigae)
+            binding.tvRecipeDetail.text = resources.getString(R.string.recipe_jjigae)
+        }
+        else if((activity as RecommendRecipeActivty).recipeMenu.contains("김치볶음밥")){
+            binding.recipeContainer.setBackgroundResource(R.drawable.kimchi)
+            binding.tvRecipeDetail.text = resources.getString(R.string.recipe_kimchi)
+        }
+        else{
+            binding.recipeContainer.setBackgroundResource(R.drawable.default_img)
+            binding.tvRecipeDetail.text = resources.getString(R.string.recipe)
+        }
 
         binding.ivNotice.setOnClickListener{
             RecipeNoticeDialog().show(this.parentFragmentManager, "")
@@ -88,7 +102,6 @@ class RecommendDetailFragment : BaseFragment<FragmentRecommendDetailBinding>(R.l
         }
 
 
-        //var listManager2 = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         val listManager2 = FlexboxLayoutManager(activity).apply{
             flexWrap = FlexWrap.WRAP
             flexDirection = FlexDirection.ROW

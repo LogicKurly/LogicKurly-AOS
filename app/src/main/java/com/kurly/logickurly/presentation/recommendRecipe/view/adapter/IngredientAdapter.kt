@@ -52,35 +52,102 @@ class IngredientAdapter(var context: Context, var ingredientList: ArrayList<Stri
             itemClickListener.onClick(it,parentPosition)
         }
 
-        Glide.with(context)
-            .load(R.drawable.carrot) //itemImageList[parentPosition][0]
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .fitCenter()
-            .into(holder.iv_image_item1)
+        if(ingredientList[parentPosition].contains("배추")) {
 
-        Glide.with(context)
-            .load(R.drawable.carrot) //itemImageList[parentPosition][1]
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .fitCenter()
-            .into(holder.iv_image_item2)
+            Glide.with(context)
+                .load(R.drawable.cabbage1) //itemImageList[parentPosition][0]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item1)
 
-        Glide.with(context)
-            .load(R.drawable.carrot) //itemImageList[parentPosition][2]
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .fitCenter()
-            .into(holder.iv_image_item3)
+            Glide.with(context)
+                .load(R.drawable.cabbage2) //itemImageList[parentPosition][1]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item2)
 
-        Glide.with(context)
-            .load(R.drawable.carrot) //itemImageList[parentPosition][3]
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .fitCenter()
-            .into(holder.iv_image_item4)
+            Glide.with(context)
+                .load(R.drawable.cabbage3) //itemImageList[parentPosition][2]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item3)
 
-        Glide.with(context)
-            .load(R.drawable.carrot) //itemImageList[parentPosition][4]
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .fitCenter()
-            .into(holder.iv_image_item5)
+            Glide.with(context)
+                .load(R.drawable.cabbage4) //itemImageList[parentPosition][3]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item4)
+
+            Glide.with(context)
+                .load(R.drawable.cabbage5) //itemImageList[parentPosition][4]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item5)
+        }
+        else if(ingredientList[parentPosition].contains("고춧가루")) {
+
+            Glide.with(context)
+                .load(R.drawable.spicy1) //itemImageList[parentPosition][0]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item1)
+
+            Glide.with(context)
+                .load(R.drawable.spicy2) //itemImageList[parentPosition][1]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item2)
+
+            Glide.with(context)
+                .load(R.drawable.spicy3) //itemImageList[parentPosition][2]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item3)
+
+            Glide.with(context)
+                .load(R.drawable.spicy4) //itemImageList[parentPosition][3]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item4)
+
+            Glide.with(context)
+                .load(R.drawable.spicy5) //itemImageList[parentPosition][4]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item5)
+        }
+        else {
+
+            Glide.with(context)
+                .load(R.drawable.default_img) //itemImageList[parentPosition][0]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item1)
+
+            Glide.with(context)
+                .load(R.drawable.default_img) //itemImageList[parentPosition][1]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item2)
+
+            Glide.with(context)
+                .load(R.drawable.default_img) //itemImageList[parentPosition][2]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item3)
+
+            Glide.with(context)
+                .load(R.drawable.default_img) //itemImageList[parentPosition][3]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item4)
+
+            Glide.with(context)
+                .load(R.drawable.default_img) //itemImageList[parentPosition][4]
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(holder.iv_image_item5)
+        }
 
         holder.tv_deliver_item1.text = itemDeliverList[parentPosition][0]
         holder.tv_deliver_item2.text = itemDeliverList[parentPosition][1]

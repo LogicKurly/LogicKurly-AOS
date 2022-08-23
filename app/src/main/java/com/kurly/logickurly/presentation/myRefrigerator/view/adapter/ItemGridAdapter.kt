@@ -134,7 +134,7 @@ class ItemGridAdapter(var context: Context, var productList: ArrayList<String>, 
 
             else -> {
                 Glide.with(context)
-                    .load(R.drawable.carrot)
+                    .load(R.drawable.default_img)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .fitCenter()
                     .circleCrop()

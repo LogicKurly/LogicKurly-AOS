@@ -63,18 +63,8 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
          *
          * */
 
-        val ingredientList = mutableListOf<String>()
-        ingredientList.add("당근")
-        ingredientList.add("고추")
-        ingredientList.add("시금치")
-        ingredientList.add("차돌박이")
-        ingredientList.add("버섯")
-        ingredientList.add("상추")
-        ingredientList.add("두부")
-        ingredientList.add("배추")
-        ingredientList.add("단호박")
-        ingredientList.add("감자")
-        ingredientList.add("굴비")
+        val ingredientList = mutableListOf("당근","고추","시금치","차돌박이","버섯","상추","두부","배추","단호박","감자","굴비","양파",
+        "마늘","파","호박","고구마","된장","고추장","간장","식초","소금","설탕")
 
         //popular RecyclerView
         var itemList = arrayListOf("당근", "고추","시금치","배추")
@@ -245,8 +235,14 @@ class AddRefrigeratorActivity : BaseActivity<ActivityAddRefrigeratorBinding>(R.l
                 } else {
                     textDetectSelectedItemList[position] = 0
                     makeToast("선택하신 식재료를 꺼냈습니다")
-                    Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem("MyRefrigerator",Preferences.getInstance(this@AddRefrigeratorActivity).getStringItem("MyRefrigerator","").toString().replace(textDetectList[position],""))
+                    Preferences.getInstance(this@AddRefrigeratorActivity).putStringItem(
+                        "MyRefrigerator",
+                        Preferences.getInstance(this@AddRefrigeratorActivity)
+                            .getStringItem("MyRefrigerator", "").toString()
+                            .replace(textDetectList[position], "")
+                    )
                 }
+
                 listSearchAdapter.notifyDataSetChanged()
             }
         })
