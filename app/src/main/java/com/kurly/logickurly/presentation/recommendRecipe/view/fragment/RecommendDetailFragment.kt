@@ -4,6 +4,9 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.kurly.logickurly.R
 import com.kurly.logickurly.data.model.Preferences
 import com.kurly.logickurly.databinding.FragmentRecommendDetailBinding
@@ -11,6 +14,7 @@ import com.kurly.logickurly.presentation.addRefrigerator.adapter.PopularAdapter
 import com.kurly.logickurly.presentation.base.BaseFragment
 import com.kurly.logickurly.presentation.recommendRecipe.view.RecommendRecipeActivty
 import com.kurly.logickurly.presentation.recommendRecipe.view.adapter.IngredientAdapter
+import com.kurly.logickurly.presentation.recommendRecipe.view.adapter.RequireAdapter
 import com.kurly.logickurly.presentation.recommendRecipe.view.dialog.AddCartDialog
 import com.kurly.logickurly.presentation.recommendRecipe.view.dialog.RecipeNoticeDialog
 import com.kurly.logickurly.presentation.recommendRecipe.viewModel.RecommendRecipeViewModel
@@ -84,15 +88,20 @@ class RecommendDetailFragment : BaseFragment<FragmentRecommendDetailBinding>(R.l
         }
 
 
-        var listManager2 = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        var listAdapter2 = PopularAdapter(requireContext(), requireIngredientList as ArrayList<String>, selectedItemList as ArrayList<Int>)
+        //var listManager2 = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        val listManager2 = FlexboxLayoutManager(activity).apply{
+            flexWrap = FlexWrap.WRAP
+            flexDirection = FlexDirection.ROW
+        }
+
+        var listAdapter2 = RequireAdapter(requireContext(), requireIngredientList as ArrayList<String>, selectedItemList as ArrayList<Int>)
         var recyclerList2 = binding.ingredientRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = listManager2
             adapter = listAdapter2
         }
 
-        listAdapter2.setItemClickListener(object : PopularAdapter.ItemClickListener {
+        listAdapter2.setItemClickListener(object : RequireAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
             }
         })

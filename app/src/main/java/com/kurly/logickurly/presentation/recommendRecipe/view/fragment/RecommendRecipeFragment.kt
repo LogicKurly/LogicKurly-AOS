@@ -75,6 +75,7 @@ class RecommendRecipeFragment: BaseFragment<FragmentRecommendRecipeBinding>(R.la
         requireFoodList.add(requireIngredientList as ArrayList<String>)
         requireFoodList.add(requireIngredientList2 as ArrayList<String>)
 
+
         var listManager2 = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         var listAdapter2 = RecommendRecipeAdapter(requireContext(),
             foodList as ArrayList<String>, foodImageList as ArrayList<String>, requireFoodList as ArrayList<ArrayList<String>>

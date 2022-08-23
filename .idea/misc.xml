@@ -43,6 +43,7 @@
         <entry key="app/src/main/res/layout/product_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/recommend_recipe_item.xml" value="0.16084442138671878" />
         <entry key="app/src/main/res/layout/require_ingredient_item.xml" value="0.31769436997319034" />
+        <entry key="app/src/main/res/layout/require_item.xml" value="0.44654814067639803" />
         <entry key="app/src/main/res/layout/search_list_item.xml" value="0.38235294117647056" />
         <entry key="app/src/main/res/xml/filepaths.xml" value="0.10888157894736843" />
       </map>
